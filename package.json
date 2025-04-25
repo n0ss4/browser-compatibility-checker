@@ -1,0 +1,23 @@
+{
+  "name": "browser-compatibility-checker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "browser-compatibility-checker": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n0ss4/browser-compatibility-checker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/n0ss4/browser-compatibility-checker/issues"
+  },
+  "homepage": "https://github.com/n0ss4/browser-compatibility-checker#readme",
+  "description": ""
+}
