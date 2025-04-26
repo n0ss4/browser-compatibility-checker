@@ -1,12 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 import ora from 'ora';
-import { defaultFeatures } from '../config/featureMap';
-import { isFeatureSupported } from './featureChecker';
-import { searchFeatureInFile } from './fileAnalyzer';
-import { displayConsoleReport } from '../reporters/consoleReporter';
-import { generateJsonReport } from '../reporters/jsonReporter';
-import { logInfo, logTitle, logWarning, logError } from '../utils/logger';
+import { defaultFeatures } from '../config/featureMap.js';
+import { isFeatureSupported } from './featureChecker.js';
+import { searchFeatureInFile } from './fileAnalyzer.js';
+import { displayConsoleReport } from '../reporters/consoleReporter.js';
+import { generateJsonReport } from '../reporters/jsonReporter.js';
+import { logInfo, logTitle, logWarning, logError } from '../utils/logger.js';
 
 export interface ScanOptions {
   dir: string;

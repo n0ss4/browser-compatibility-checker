@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import figlet from 'figlet';
 import Table from 'cli-table3';
-import { truncatePath } from '../utils/pathUtils';
+import { truncatePath } from '../utils/pathUtils.js';
 
 interface Issue {
   feature: string;

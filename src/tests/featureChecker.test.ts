@@ -1,4 +1,5 @@
-import { isFeatureSupported } from '../src/core/featureChecker';
+import { describe, it, expect, jest } from '@jest/globals';
+import { isFeatureSupported } from '../core/featureChecker.js';
 
 jest.mock('browserslist', () => () => ['defaults']);
 

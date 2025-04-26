@@ -1,5 +1,6 @@
 {
   "name": "browser-compatibility-checker",
+  "type": "module",
   "version": "1.0.0",
   "main": "dist/index.js",
   "bin": {
@@ -8,8 +9,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/bin/cli.js",
-    "dev": "ts-node src/bin/cli.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx src/bin/cli.ts",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "jest": "^29.7.0",
     "ts-jest": "^29.3.2",
     "ts-node": "^10.9.2",
+    "tsx": "^4.19.3",
     "typescript": "^5.3.3"
   }
 }

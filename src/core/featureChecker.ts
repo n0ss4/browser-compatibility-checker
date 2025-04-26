@@ -1,55 +1,57 @@
 import browserslist from 'browserslist';
 import caniuse from 'caniuse-lite';
-import { featureMapping } from '../config/featureMap';
-import { logVerbose, logWarning, logError } from '../utils/logger';
+import { featureMapping } from '../config/featureMap.js';
+import { logWarning, logError } from '../utils/logger.js';
 
 export function isFeatureSupported(feature: string, verbose = false): boolean {
   const caniuseFeature = featureMapping[feature];
 
   if (!caniuseFeature) {
-    if (verbose) logWarning(`No compatibility data for: ${feature}`);
-    return true;
+    if (verbose) logWarning(`No compatibility data for feature: ${feature}`);
+    return false;
   }
 
-  if (!caniuse || !caniuse.features) {
-    logWarning('caniuse-lite data structure is not as expected. Unable to check compatibility.');
-    return true;
+  if (!caniuse?.features) {
+    if (verbose) logWarning('caniuse-lite data structure is invalid. Unable to check compatibility.');
+    return false;
   }
 
   try {
     const featureData = caniuse.feature(caniuse.features[caniuseFeature]);
     if (!featureData?.stats) {
-      if (verbose) logWarning(`No compatibility data found for: ${caniuseFeature}`);
-      return true;
+      if (verbose) logWarning(`No stats found for feature: ${caniuseFeature}`);
+      return false;
     }
 
     const browsers = browserslist();
     const supportData = featureData.stats;
-    let supported = true;
     const incompatibleBrowsers: string[] = [];
 
     for (const browser of browsers) {
       const [name, version] = browser.split(' ');
 
-      if (!supportData[name] || !supportData[name][version]) {
-        if (verbose) logWarning(`No data for ${name} ${version}`);
+      const versionSupport = supportData[name]?.[version];
+      if (!versionSupport) {
+        if (verbose) logWarning(`No support data for browser: ${name} ${version}`);
         continue;
       }
 
-      if (!supportData[name][version].includes('y')) {
-        supported = false;
+      // Si no hay 'y' (yes) en el soporte de la versión, no es compatible
+      if (!versionSupport.includes('y')) {
         incompatibleBrowsers.push(browser);
       }
     }
 
-    if (!supported && verbose) {
-      logWarning(`${feature} is not compatible with: ${incompatibleBrowsers.join(', ')}`);
+    const isSupported = incompatibleBrowsers.length === 0;
+
+    if (!isSupported && verbose) {
+      logWarning(`${feature} is not supported on: ${incompatibleBrowsers.join(', ')}`);
     }
 
-    return supported;
-  } catch (err: any) {
-    logError(`Error checking compatibility for ${feature}: ${err.message}`);
-    if (verbose) console.error(err);
-    return true;
+    return isSupported;
+  } catch (error: any) {
+    logError(`Failed to check feature support for ${feature}: ${error.message}`);
+    if (verbose) console.error(error);
+    return false;
   }
 }

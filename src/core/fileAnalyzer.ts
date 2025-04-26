@@ -1,6 +1,6 @@
 import fs from 'fs';
-import { featureRegexMapping } from '../config/featureMap';
-import { logError, logWarning } from '../utils/logger';
+import { featureRegexMapping } from '../config/featureMap.js';
+import { logError, logWarning } from '../utils/logger.js';
 
 export interface Match {
   line: number;

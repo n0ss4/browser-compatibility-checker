@@ -1,5 +1,5 @@
-import { runScanner } from "./core/scanner";
-import { defaultFeatures } from "./config/featureMap";
+import { runScanner } from "./core/scanner.js";
+import { defaultFeatures } from "./config/featureMap.js";
 
 export { runScanner };
 

@@ -1,7 +1,7 @@
 import { Command } from 'commander';
 import path from 'path';
 import figlet from 'figlet';
-import { runScanner } from '../core/scanner';
+import { runScanner } from '../core/scanner.js';
 
 const program = new Command();
 
